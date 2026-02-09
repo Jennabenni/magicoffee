@@ -1,0 +1,607 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --magic-blue: #5280ff;
+    --magic-blue-dark: #3d62cc;
+    --magic-blue-darker: #2a4799;
+    --magic-gold: #ffdc5e;
+    --magic-gold-dark: #e6c54a;
+    --text-dark: #1a1a2e;
+    --text-light: #ffffff;
+    --bg-main: #b8cfff;
+    --bg-card: #ffffff;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--bg-main);
+}
+
+p {
+    font-size: 1.15rem;
+    margin-bottom: 1rem;
+}
+
+/* Navigation */
+nav {
+    background: linear-gradient(135deg, var(--magic-blue-darker) 0%, var(--magic-blue-dark) 100%);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(82, 128, 255, 0.3);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+}
+
+nav ul li a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+nav ul li a:hover {
+    color: var(--magic-gold);
+    text-shadow: 0 0 10px rgba(255, 220, 94, 0.5);
+}
+
+nav ul li a.active {
+    color: var(--magic-gold);
+    border-bottom: 2px solid var(--magic-gold);
+}
+
+/* Header Base Styles */
+header {
+    color: var(--text-light);
+    text-align: center;
+    padding: 6rem 2rem;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+header > * {
+    position: relative;
+    z-index: 2;
+}
+
+header h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    letter-spacing: 3px;
+    background: var(--magic-blue-darker);
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+header p {
+    font-size: 1.4rem;
+    font-style: italic;
+    background: var(--magic-blue-darker);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+/* Page-specific headers */
+.header-home {
+    background: linear-gradient(135deg, rgba(82, 128, 255, 0.35) 0%, rgba(42, 71, 153, 0.4) 100%),
+                url('public/images/banner.jpg') center/cover;
+}
+
+.header-about {
+    background: linear-gradient(135deg, rgba(42, 71, 153, 0.4) 0%, rgba(82, 128, 255, 0.35) 100%),
+                url('https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1200') center/cover;
+}
+
+.header-menu {
+    background: linear-gradient(135deg, rgba(82, 128, 255, 0.3) 0%, rgba(42, 71, 153, 0.4) 100%),
+                url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200') center/cover;
+}
+
+.header-contact {
+    background: linear-gradient(135deg, rgba(42, 71, 153, 0.35) 0%, rgba(82, 128, 255, 0.4) 100%),
+                url('https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=1200') center/cover;
+}
+
+/* Sparkle accent for headers */
+header h1::after {
+    content: ' ✨';
+}
+
+/* About Team Image */
+.about-team-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    object-fit: cover;
+}
+
+/* Menu Hero Image */
+.menu-hero-img {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    display: block;
+    margin: 0 auto 3rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    object-fit: cover;
+}
+
+/* Main Content */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+section {
+    margin-bottom: 3rem;
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+h2 {
+    color: var(--magic-blue-dark);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+h3 {
+    color: var(--magic-blue-darker);
+    margin-bottom: 0.5rem;
+}
+
+/* Cards */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.card {
+    background: linear-gradient(145deg, #ffffff 0%, #f0f4ff 100%);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 6px 25px rgba(42, 71, 153, 0.25);
+    text-align: center;
+    border: 2px solid #c5d4f5;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    border-color: var(--magic-gold);
+    box-shadow: 0 10px 35px rgba(42, 71, 153, 0.35);
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    color: var(--magic-blue-dark);
+    margin-bottom: 1rem;
+}
+
+/* Gold accent decoration */
+.card::before {
+    content: '⭐';
+    display: block;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+/* Menu Items - these are used as sections on menu page */
+.menu-category {
+    margin-bottom: 2.5rem;
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Override section styles when menu-category is used */
+section.menu-category {
+    background: var(--bg-card);
+}
+
+.menu-category h2 {
+    color: var(--magic-blue-dark);
+    border-bottom: 3px solid var(--magic-gold);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px dashed var(--magic-gold);
+}
+
+.menu-item:last-child {
+    border-bottom: none;
+}
+
+.item-name {
+    font-weight: bold;
+    color: var(--magic-blue-darker);
+}
+
+.item-description {
+    color: #555;
+    font-size: 1rem;
+    font-style: italic;
+}
+
+.item-price {
+    color: var(--magic-blue-dark);
+    font-weight: bold;
+    background: var(--magic-gold);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.95rem;
+}
+
+/* Featured Menu Items */
+.featured-item {
+    background: linear-gradient(145deg, #f8faff 0%, #eef3ff 100%);
+    padding: 1rem;
+    border-radius: 12px;
+    margin: 0.5rem 0;
+    border: 1px solid #e0e8ff;
+}
+
+.item-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+.popular-badge {
+    background: var(--magic-gold);
+    color: var(--magic-blue-darker);
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    margin-left: 0.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Flavor Add-Ons Section */
+.addons-section {
+    background: linear-gradient(145deg, #ffffff 0%, #f8faff 100%);
+}
+
+.addons-intro {
+    text-align: center;
+    font-style: italic;
+    color: var(--magic-blue-dark);
+    margin-bottom: 2rem;
+}
+
+.addons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.25rem;
+    margin: 1.5rem 0;
+}
+
+.addon-item {
+    background: linear-gradient(145deg, #f0f4ff 0%, #e8eeff 100%);
+    padding: 1.25rem;
+    border-radius: 12px;
+    border: 2px solid #c5d4f5;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.addon-item::before {
+    content: '✨';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1rem;
+    opacity: 0.6;
+}
+
+.addon-item:hover {
+    border-color: var(--magic-gold);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(42, 71, 153, 0.2);
+}
+
+.addon-name {
+    font-weight: bold;
+    color: var(--magic-blue-darker);
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.addon-description {
+    color: #555;
+    font-size: 0.95rem;
+    font-style: italic;
+    margin-bottom: 0.75rem;
+}
+
+.addon-price {
+    background: var(--magic-gold);
+    color: var(--magic-blue-darker);
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    display: inline-block;
+}
+
+.addons-note {
+    text-align: center;
+    color: var(--magic-blue-dark);
+    font-weight: bold;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 2px dashed var(--magic-gold);
+}
+
+/* Contact Form */
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+.contact-info {
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border-left: 4px solid var(--magic-gold);
+}
+
+.contact-info h3 {
+    color: var(--magic-blue-dark);
+    margin-top: 1.5rem;
+}
+
+.contact-info h3:first-child {
+    margin-top: 0;
+}
+
+form {
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border-left: 4px solid var(--magic-blue);
+}
+
+form h3 {
+    color: var(--magic-blue-dark);
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--magic-blue-darker);
+    font-weight: bold;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-family: inherit;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--magic-blue);
+    box-shadow: 0 0 0 3px rgba(82, 128, 255, 0.2);
+}
+
+button {
+    background: linear-gradient(135deg, var(--magic-blue) 0%, var(--magic-blue-dark) 100%);
+    color: var(--text-light);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(82, 128, 255, 0.3);
+}
+
+button:hover {
+    background: linear-gradient(135deg, var(--magic-blue-dark) 0%, var(--magic-blue-darker) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(82, 128, 255, 0.4);
+}
+
+/* Neighborhood Section */
+.neighborhood-section {
+    text-align: left;
+}
+
+.neighborhood-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.neighborhood-text p {
+    margin-bottom: 1rem;
+    line-height: 1.8;
+}
+
+.neighborhood-text p:last-child {
+    margin-bottom: 0;
+}
+
+.neighborhood-highlights {
+    background: linear-gradient(145deg, #f0f4ff 0%, #e8eeff 100%);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 2px solid #c5d4f5;
+}
+
+.highlight-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px dashed var(--magic-gold);
+}
+
+.highlight-item:last-child {
+    border-bottom: none;
+}
+
+.highlight-icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+
+/* Map Section */
+.map-section {
+    text-align: center;
+}
+
+.map-container {
+    margin-top: 1.5rem;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.map-container iframe {
+    display: block;
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(135deg, var(--magic-blue-darker) 0%, var(--magic-blue-dark) 100%);
+    color: var(--text-light);
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Magic sparkle accents */
+h2::before {
+    content: '✦ ';
+    color: var(--magic-gold);
+}
+
+h2::after {
+    content: ' ✦';
+    color: var(--magic-gold);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    header h1 {
+        font-size: 2rem;
+        padding: 0.75rem 1.5rem;
+    }
+
+    header p {
+        font-size: 1.1rem;
+    }
+
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+
+    .menu-item {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .featured-item {
+        align-items: center;
+        text-align: center;
+    }
+
+    .item-image {
+        margin-right: 0;
+        margin-bottom: 1rem;
+        width: 100px;
+        height: 100px;
+    }
+
+    .item-price {
+        align-self: flex-start;
+    }
+
+    section {
+        padding: 1.5rem;
+    }
+
+    .neighborhood-content {
+        grid-template-columns: 1fr;
+    }
+
+    .neighborhood-highlights {
+        margin-top: 1rem;
+    }
+
+    .addons-grid {
+        grid-template-columns: 1fr;
+    }
+}
