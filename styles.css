@@ -84,7 +84,7 @@ header::before {
     z-index: 1;
 }
 
-header > * {
+header>* {
     position: relative;
     z-index: 2;
 }
@@ -111,22 +111,22 @@ header p {
 /* Page-specific headers */
 .header-home {
     background: linear-gradient(135deg, rgba(82, 128, 255, 0.35) 0%, rgba(42, 71, 153, 0.4) 100%),
-                url('public/images/banner.jpg') center/cover;
+        url('public/images/banner.jpg') center/cover;
 }
 
 .header-about {
     background: linear-gradient(135deg, rgba(42, 71, 153, 0.4) 0%, rgba(82, 128, 255, 0.35) 100%),
-                url('https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1200') center/cover;
+        url('https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1200') center/cover;
 }
 
 .header-menu {
     background: linear-gradient(135deg, rgba(82, 128, 255, 0.3) 0%, rgba(42, 71, 153, 0.4) 100%),
-                url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200') center/cover;
+        url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200') center/cover;
 }
 
 .header-contact {
     background: linear-gradient(135deg, rgba(42, 71, 153, 0.35) 0%, rgba(82, 128, 255, 0.4) 100%),
-                url('https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=1200') center/cover;
+        url('https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=1200') center/cover;
 }
 
 /* Sparkle accent for headers */
@@ -429,7 +429,8 @@ label {
     font-weight: bold;
 }
 
-input, textarea {
+input,
+textarea {
     width: 100%;
     padding: 0.8rem;
     border: 2px solid #e0e0e0;
@@ -438,7 +439,8 @@ input, textarea {
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
     outline: none;
     border-color: var(--magic-blue);
     box-shadow: 0 0 0 3px rgba(82, 128, 255, 0.2);
@@ -604,4 +606,103 @@ h2::after {
     .addons-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* Quiz Styles */
+#quiz-section {
+    text-align: center;
+    margin: 1rem 0;
+    /* Reduced from 2rem */
+}
+
+#quiz-section h2 {
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+    /* Reduced */
+    font-size: 1.8rem;
+    /* Slightly smaller */
+}
+
+#quiz-container {
+    background: var(--bg-card);
+    padding: 1.5rem;
+    /* Reduced from 2rem */
+    border-radius: 10px;
+    border: 2px solid #05072e;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    /* Darker shadow */
+    max-width: 500px;
+    /* Reduced from 600px */
+    margin: 0 auto;
+    color: #05072e;
+}
+
+#options .option-btn {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    background: var(--bg-main);
+    border: 2px solid var(--magic-blue);
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    color: #05072e;
+}
+
+#options .option-btn:hover {
+    background: var(--magic-blue);
+    color: var(--text-light);
+}
+
+#options .option-btn.selected {
+    background: var(--magic-blue-dark);
+    color: var(--text-light);
+    border-color: var(--magic-blue-darker);
+}
+
+#next-btn,
+#retake-btn {
+    background: var(--magic-blue);
+    color: var(--text-light);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+#next-btn:hover,
+#retake-btn:hover {
+    background: var(--magic-blue-dark);
+}
+
+#results img {
+    max-width: 200px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Add-on suggestion pills (small image-like boxes) */
+.addon-suggestion {
+    display: inline-block;
+    width: 110px;
+    height: 36px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin: 0.25rem 0.5rem 0 0.5rem;
+    vertical-align: middle;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.addon-labels {
+    margin-top: 0.5rem;
+    text-align: center;
 }

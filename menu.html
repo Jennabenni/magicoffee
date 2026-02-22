@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magicoffee - Menu</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <nav>
         <ul>
@@ -22,7 +24,19 @@
     </header>
 
     <main>
-        <img src="public/images/menuImg.jpg" alt="Two guests browsing the Magicoffee menu in a cozy, mystically lit café" class="menu-hero-img">
+        <img src="public/images/menuImg.jpg"
+            alt="Two guests browsing the Magicoffee menu in a cozy, mystically lit café" class="menu-hero-img">
+
+        <!-- Simple Quiz: appears under hero image, compact, one question at a time -->
+        <section id="quiz-section">
+            <h2>Find Your Perfect Drink</h2>
+            <div id="quiz-box">
+                <p id="question-text">Loading...</p>
+                <div id="options"></div>
+                <div style="margin-top:0.75rem;"><button id="next-btn" style="display:none;">Next</button></div>
+                <div id="result" style="display:none; margin-top:0.75rem;"></div>
+            </div>
+        </section>
 
         <section class="menu-category">
             <h2>Hot Drinks</h2>
@@ -41,7 +55,8 @@
                 <span class="item-price">$4.00</span>
             </div>
             <div class="menu-item featured-item">
-                <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400" alt="Cappuccino" class="item-image">
+                <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400" alt="Cappuccino"
+                    class="item-image">
                 <div>
                     <span class="item-name">Cappuccino <span class="popular-badge">Popular</span></span>
                     <p class="item-description">Espresso with steamed milk and velvety foam</p>
@@ -81,7 +96,8 @@
                 <span class="item-price">$5.25</span>
             </div>
             <div class="menu-item featured-item">
-                <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=400" alt="Cold Brew" class="item-image">
+                <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=400" alt="Cold Brew"
+                    class="item-image">
                 <div>
                     <span class="item-name">Cold Brew <span class="popular-badge">Popular</span></span>
                     <p class="item-description">Slow-steeped for 20 hours, smooth and refreshing</p>
@@ -100,7 +116,8 @@
         <section class="menu-category">
             <h2>Pastries & Snacks</h2>
             <div class="menu-item featured-item">
-                <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400" alt="Croissant" class="item-image">
+                <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400" alt="Croissant"
+                    class="item-image">
                 <div>
                     <span class="item-name">Croissant <span class="popular-badge">Popular</span></span>
                     <p class="item-description">Buttery, flaky, freshly baked</p>
@@ -125,7 +142,8 @@
 
         <section class="menu-category addons-section">
             <h2>Enchanted Flavor Add-Ons</h2>
-            <p class="addons-intro">Cast a spell on any drink with our magical flavor enhancements. Each potion is crafted to transform your beverage into something extraordinary.</p>
+            <p class="addons-intro">Cast a spell on any drink with our magical flavor enhancements. Each potion is
+                crafted to transform your beverage into something extraordinary.</p>
 
             <div class="addons-grid">
                 <div class="addon-item">
@@ -177,5 +195,118 @@
     <footer>
         <p>&copy; 2026 Magicoffee. All rights reserved.</p>
     </footer>
+    <script>
+        (function () {
+            const questions = [
+                { q: 'Hot or Cold Drink?', key: 'temp', options: ['Hot', 'Cold'] },
+                { q: 'Traditional or Innovative Drink?', key: 'style', options: ['Traditional', 'Innovative'] },
+                { q: 'What word best describes your ideal coffee experience?', key: 'flavor', options: ['Bold', 'Sweet', 'Refreshing', 'Cozy'] }
+            ];
+
+            let idx = 0;
+            const answers = {};
+            let selected = null;
+
+            const questionText = document.getElementById('question-text');
+            const optionsDiv = document.getElementById('options');
+            const nextBtn = document.getElementById('next-btn');
+            const resultDiv = document.getElementById('result');
+
+            function renderQuestion() {
+                selected = null;
+                resultDiv.style.display = 'none';
+                nextBtn.style.display = 'none';
+                optionsDiv.innerHTML = '';
+                const q = questions[idx];
+                questionText.textContent = q.q;
+                q.options.forEach(opt => {
+                    const b = document.createElement('button');
+                    b.type = 'button';
+                    b.textContent = opt;
+                    b.className = 'option-btn';
+                    b.style.margin = '0.25rem';
+                    b.onclick = () => {
+                        selected = opt;
+                        // visual
+                        Array.from(optionsDiv.children).forEach(n => n.classList.remove('selected'));
+                        b.classList.add('selected');
+                        nextBtn.style.display = 'inline-block';
+                    };
+                    optionsDiv.appendChild(b);
+                });
+            }
+
+            function next() {
+                if (!selected) return alert('Please choose an option.');
+                answers[questions[idx].key] = selected;
+                idx++;
+                if (idx < questions.length) renderQuestion();
+                else showResult();
+            }
+
+            function showResult() {
+                questionText.textContent = '';
+                optionsDiv.innerHTML = '';
+                nextBtn.style.display = 'none';
+                // simple mapping to 4 results
+                const temp = answers.temp;
+                const style = answers.style;
+                const flavor = answers.flavor;
+                let drink = 'Cappuccino';
+                if (temp === 'Hot' && style === 'Traditional' && flavor === 'Bold') drink = 'Espresso';
+                else if (temp === 'Hot' && style === 'Traditional') drink = 'Latte';
+                else if (temp === 'Cold' && (flavor === 'Refreshing' || style === 'Traditional')) drink = 'Cold Brew';
+                else drink = 'Frappuccino';
+
+                const imgs = {
+                    'Espresso': 'public/images/menuImg.jpg',
+                    'Latte': 'https://images.unsplash.com/photo-1561047029-3000c68339ca?w=400',
+                    'Cold Brew': 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=400',
+                    'Frappuccino': 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400',
+                    'Cappuccino': 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400'
+                };
+
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = `<div style="text-align:center"><img src="${imgs[drink] || imgs['Cappuccino']}" alt="${drink}" style="max-width:160px;border-radius:8px"><h3 style="color:#05072e">${drink}</h3></div>`;
+                // small addon suggestions (text pills)
+                const pillWrap = document.createElement('div');
+                pillWrap.style.textAlign = 'center';
+                const addonMap = {
+                    'Bold': ['Phoenix Cayenne', 'Dragon\'s Breath Ginger'],
+                    'Sweet': ['Mystic Salted Caramel', 'Stardust Vanilla'],
+                    'Refreshing': ['Moonbeam Lavender', 'Fairy Garden Rose'],
+                    'Cozy': ['Enchanted Forest', 'Wizard\'s Maple Bacon']
+                };
+                (addonMap[flavor] || addonMap['Cozy']).forEach(a => {
+                    const p = document.createElement('span');
+                    p.textContent = a;
+                    p.style.display = 'inline-block';
+                    p.style.padding = '6px 10px';
+                    p.style.margin = '6px';
+                    p.style.background = '#05072e';
+                    p.style.color = '#fff';
+                    p.style.borderRadius = '8px';
+                    p.className = 'addon-pill'
+                    pillWrap.appendChild(p);
+                });
+                resultDiv.appendChild(pillWrap);
+                // retake
+                const ret = document.createElement('div');
+                ret.style.textAlign = 'center';
+                const rbtn = document.createElement('button');
+                rbtn.textContent = 'Retake Quiz';
+                rbtn.onclick = () => { idx = 0; Object.keys(answers).forEach(k => delete answers[k]); renderQuestion(); resultDiv.style.display = 'none'; };
+                rbtn.style.marginTop = '10px';
+                ret.appendChild(rbtn);
+                resultDiv.appendChild(ret);
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                renderQuestion();
+                nextBtn.addEventListener('click', next);
+            });
+        })();
+    </script>
 </body>
+
 </html>
