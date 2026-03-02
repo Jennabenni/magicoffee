@@ -43,6 +43,7 @@
                     </p>
                 </div>
 
+                <p id="formSuccess" hidden>Thank you! Your message has been submitted.</p>
                 <form id="contactForm" action="#" method="post" novalidate>
                     <h3>Send Us a Message</h3>
                     <div class="form-group">
@@ -114,6 +115,13 @@
 
                     document.getElementById('contactForm').addEventListener('submit', function(e) {
                         e.preventDefault();
+                        Object.keys(fields).forEach(k => {
+                            fields[k].el.value = '';
+                            fields[k].valid = false;
+                            fields[k].err.textContent = '';
+                        });
+                        submitBtn.disabled = true;
+                        document.getElementById('formSuccess').hidden = false;
                     });
                 </script>
             </div>
