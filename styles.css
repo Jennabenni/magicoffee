@@ -459,10 +459,24 @@ button {
     box-shadow: 0 4px 15px rgba(82, 128, 255, 0.3);
 }
 
-button:hover {
+button:hover:not(:disabled) {
     background: linear-gradient(135deg, var(--magic-blue-dark) 0%, var(--magic-blue-darker) 100%);
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(82, 128, 255, 0.4);
+}
+
+button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.field-error {
+    display: block;
+    color: #c0392b;
+    font-size: 0.82rem;
+    margin-top: 0.3rem;
+    min-height: 1.1em;
 }
 
 /* Neighborhood Section */

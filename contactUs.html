@@ -43,26 +43,79 @@
                     </p>
                 </div>
 
-                <form action="#" method="post">
+                <form id="contactForm" action="#" method="post" novalidate>
                     <h3>Send Us a Message</h3>
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required>
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" autocomplete="given-name">
+                        <span class="field-error" id="firstNameError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" autocomplete="family-name">
+                        <span class="field-error" id="lastNameError"></span>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" required>
+                        <input type="text" id="email" name="email" autocomplete="email">
+                        <span class="field-error" id="emailError"></span>
                     </div>
                     <div class="form-group">
                         <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="5" required></textarea>
+                        <textarea id="message" name="message" rows="5"></textarea>
+                        <span class="field-error" id="messageError"></span>
                     </div>
-                    <button type="submit">Send Message</button>
+                    <button type="submit" id="submitBtn" disabled>Send Message</button>
                 </form>
+
+                <script>
+                    const namePattern = /^[a-zA-Z']+$/;
+                    const emailPattern = /^[a-zA-Z0-9.]+@[a-zA-Z0-9.]+\.[a-zA-Z0-9.]+$/;
+
+                    const fields = {
+                        firstName: { el: document.getElementById('firstName'), err: document.getElementById('firstNameError'), valid: false },
+                        lastName:  { el: document.getElementById('lastName'),  err: document.getElementById('lastNameError'),  valid: false },
+                        email:     { el: document.getElementById('email'),     err: document.getElementById('emailError'),     valid: false },
+                        message:   { el: document.getElementById('message'),   err: document.getElementById('messageError'),   valid: false }
+                    };
+                    const submitBtn = document.getElementById('submitBtn');
+
+                    function validate(key) {
+                        const { el, err } = fields[key];
+                        const val = el.value.trim();
+                        let msg = '';
+
+                        if (key === 'firstName' || key === 'lastName') {
+                            const label = key === 'firstName' ? 'First name' : 'Last name';
+                            if (!val) {
+                                msg = label + ' is required.';
+                            } else if (!namePattern.test(val)) {
+                                msg = label + ' may only contain letters and apostrophes.';
+                            }
+                        } else if (key === 'email') {
+                            if (!val) {
+                                msg = 'Email is required.';
+                            } else if (!emailPattern.test(val)) {
+                                msg = 'Please enter a valid email address.';
+                            }
+                        } else if (key === 'message') {
+                            if (!val) msg = 'Message is required.';
+                        }
+
+                        err.textContent = msg;
+                        fields[key].valid = msg === '';
+                        submitBtn.disabled = !Object.values(fields).every(f => f.valid);
+                    }
+
+                    Object.keys(fields).forEach(key => {
+                        fields[key].el.addEventListener('input', () => validate(key));
+                        fields[key].el.addEventListener('blur', () => validate(key));
+                    });
+
+                    document.getElementById('contactForm').addEventListener('submit', function(e) {
+                        e.preventDefault();
+                    });
+                </script>
             </div>
         </section>
 
